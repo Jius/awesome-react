@@ -27,9 +27,25 @@
   }
 }
 
+@keyframes chuck-zoom {
+  0% {
+    scale: 100%;
+  }
+  50% {
+    scale: 150%;
+  }
+  100% {
+    scale: 100%;
+  }
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .logo {
+    animation: logo-spin infinite 2s linear;
+  }
+
+  .chuck {
+    animation: chuck-zoom 2s ease infinite;
   }
 }
 
