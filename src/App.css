@@ -1,10 +1,3 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -46,6 +39,7 @@
 
   .chuck {
     animation: chuck-zoom 2s ease infinite;
+    margin: 10px 0;
   }
 }
 

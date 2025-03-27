@@ -5,17 +5,17 @@ import './App.css'
 
 const Joke = ({ value, icon_url }) => {
   return (
-    <>
-      <p>{value}</p>
+    <div className="content">
       <img src={icon_url} className="chuck" />
-    </>
+      <blockquote>{value}</blockquote>
+    </div>
   )
 }
 
 const RefreshJoke = ({ onClick }) => {
   return (
     <div>
-      <button onClick={onClick}>Refresh</button>
+      <button onClick={onClick} className="button is-primary">Refresh</button>
     </div>
   )
 }
@@ -28,30 +28,48 @@ const Loader = () => {
   )
 }
 
+const JokeList = ({ jokes }) => {
+  return (
+    <div>
+      <h3 class="title is-3">My historic</h3>
+      {jokes.map((joke) => <p key={joke.id}>{joke.value}</p>)}
+    </div>
+  )
+}
+
 function App() {
   const [loading, setLoading] = useState(true)
   const [joke, setJoke] = useState()
+  const [jokes, setJokes] = useState([])
 
   const fetchJoke = async () => { 
     const url = "https://api.chucknorris.io/jokes/random"
     const response = await fetch(url)
-    setJoke(await response.json())
+    const jokeFetched = await response.json()
+    setJoke(jokeFetched)
+    setJokes([...jokes, jokeFetched])
     setLoading(false)
   }
 
   useEffect(() => {
     setTimeout(fetchJoke, 2000)
   }, [])
-
-
   
   console.log('App re-render')
   return (
-    <>
-      {loading && <Loader /> }
-      {joke && <Joke value={joke.value} icon_url={joke.icon_url}/>}
-      {joke && <RefreshJoke onClick={fetchJoke} />}
-    </>
+    <div className="container">
+      <div className="columns">
+        <div className="column">
+          {loading && <Loader /> }
+          {joke && <Joke value={joke.value} icon_url={joke.icon_url}/>}
+          {joke && <RefreshJoke onClick={fetchJoke} />}
+        </div>
+        <div className="column is-one-third">
+          {jokes.length > 0 && <JokeList jokes={jokes}/>}
+        </div>
+      </div>
+      
+    </div>
   )
 }
 
