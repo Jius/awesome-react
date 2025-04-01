@@ -1,41 +1,11 @@
 import { useState, useEffect  } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
+
 import './App.css'
-
-const Joke = ({ value, icon_url }) => {
-  return (
-    <div className="content">
-      <img src={icon_url} className="chuck" />
-      <blockquote>{value}</blockquote>
-    </div>
-  )
-}
-
-const RefreshJoke = ({ onClick }) => {
-  return (
-    <div>
-      <button onClick={onClick} className="button is-primary">Refresh</button>
-    </div>
-  )
-}
-
-const Loader = () => {
-  return (
-    <a href="https://react.dev" target="_blank">
-      <img src={reactLogo} className="logo react" alt="React logo" />
-    </a>
-  )
-}
-
-const JokeList = ({ jokes }) => {
-  return (
-    <div>
-      <h3 class="title is-3">My historic</h3>
-      {jokes.map((joke) => <p key={joke.id}>{joke.value}</p>)}
-    </div>
-  )
-}
+import {Joke} from './components/Joke'
+import {RefreshJoke} from './components/RefreshJoke'
+import {Loader} from './components/Loader'
+import {JokeList} from './components/JokeList'
 
 function App() {
   const [loading, setLoading] = useState(true)
