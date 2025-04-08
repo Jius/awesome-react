@@ -4,7 +4,8 @@ export const JokeContext = createContext({
     joke: undefined,
     jokes: [],
     loading: false,
-    fetchJoke: () => null
+    fetchJoke: () => null,
+    addJoke: () => null
 });
 
 export const useJokeContext = () => {
@@ -20,8 +21,7 @@ export const JokeContextProvider = ({ children }) => {
       const url = "https://api.chucknorris.io/jokes/random"
       const response = await fetch(url)
       const jokeFetched = await response.json()
-      setJoke(jokeFetched)
-      setJokes([...jokes, jokeFetched])
+      addJoke(jokeFetched)
       setLoading(false)
     }
   
@@ -29,12 +29,18 @@ export const JokeContextProvider = ({ children }) => {
       setTimeout(fetchJoke, 2000)
     }, [])
 
+    const addJoke = (newJoke) => {
+        setJoke(newJoke)
+        setJokes([...jokes, newJoke])
+    }
+
 
     return <JokeContext.Provider value={{
         joke,
         jokes,
         loading,
-        fetchJoke
+        fetchJoke,
+        addJoke,
     }}>
         {children}
     </JokeContext.Provider>
