@@ -30,6 +30,7 @@ export const JokeContextProvider = ({ children }) => {
     }, [])
 
     const addJoke = (newJoke) => {
+        if (jokes.find((joke) => joke.id === newJoke.id)) return
         setJoke(newJoke)
         setJokes([...jokes, newJoke])
     }
